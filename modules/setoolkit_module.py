@@ -268,7 +268,7 @@ class SEToolkitModule(QWidget):
         target_layout = QHBoxLayout()
         target_layout.addWidget(QLabel("Target URL:"))
         self.target_url_input = QLineEdit()
-        self.target_url_input.setPlaceholderText("https://example.com")
+    self.target_url_input.setPlaceholderText("Entrez l'URL cible (ex: https://site.com)")
         target_layout.addWidget(self.target_url_input)
         layout.addLayout(target_layout)
         

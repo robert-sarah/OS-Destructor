@@ -95,7 +95,7 @@ class WebAttackModule(QWidget):
         url_layout = QHBoxLayout()
         url_layout.addWidget(QLabel("URL cible:"))
         self.url_input = QLineEdit()
-        self.url_input.setPlaceholderText("https://example.com/page")
+        self.url_input.setPlaceholderText("Entrez l'URL cible (ex: https://site.com/page)")
         url_layout.addWidget(self.url_input)
         layout.addLayout(url_layout)
         

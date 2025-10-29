@@ -165,7 +165,7 @@ class PhishingModule(QWidget):
         url_layout = QHBoxLayout()
         url_layout.addWidget(QLabel("URL cible:"))
         self.url_input = QLineEdit()
-        self.url_input.setPlaceholderText("https://example.com/phishing")
+        self.url_input.setPlaceholderText("Entrez l'URL de la page de phishing (ex: https://site.com/phishing)")
         url_layout.addWidget(self.url_input)
         layout.addLayout(url_layout)
         

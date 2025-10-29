@@ -188,7 +188,7 @@ class OSINTModule(QWidget):
         target_layout = QHBoxLayout()
         target_layout.addWidget(QLabel("Target Email or Domain:"))
         self.target_input = QLineEdit()
-        self.target_input.setPlaceholderText("target@example.com or example.com")
+        self.target_input.setPlaceholderText("Entrez l'email ou le domaine cible")
         target_layout.addWidget(self.target_input)
         layout.addLayout(target_layout)
         
