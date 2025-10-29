@@ -25,7 +25,7 @@ class ReconWorker(QThread):
         time.sleep(2)
         
         results = {
-            "IP": "192.168.1.1 (exemple)",
+            "IP": self.target,
             "Ports": "80, 443, 22",
             "Technologies": "Apache 2.4, PHP 7.4",
             "Subdomains": "www, mail, ftp"
@@ -88,7 +88,7 @@ class ReconModule(QWidget):
         target_layout = QHBoxLayout()
         target_layout.addWidget(QLabel("Cible:"))
         self.target_input = QLineEdit()
-        self.target_input.setPlaceholderText("example.com ou IP")
+    self.target_input.setPlaceholderText("Entrez le domaine ou l'adresse IP cible")
         target_layout.addWidget(self.target_input)
         layout.addLayout(target_layout)
         

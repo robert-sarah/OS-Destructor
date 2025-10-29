@@ -68,14 +68,7 @@ class WiFiMLAnalyzer:
             
         except Exception as e:
             console.print(f"[red]Error: {e}[/red]")
-            console.print("[yellow]Using simulated data[/yellow]")
-            
-            # Simulated data for demo
-            self.networks = [
-                {'ssid': 'Linksys', 'mac': 'AA:BB:CC:DD:EE:01', 'signal': -45, 'channel': 6},
-                {'ssid': 'NETGEAR', 'mac': 'AA:BB:CC:DD:EE:02', 'signal': -60, 'channel': 11},
-                {'ssid': 'TP-Link', 'mac': 'AA:BB:CC:DD:EE:03', 'signal': -75, 'channel': 1}
-            ]
+            self.networks = []
             return self.networks
     
     def extract_features(self):

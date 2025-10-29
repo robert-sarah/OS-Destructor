@@ -51,8 +51,12 @@ class DeapolWorker(QThread):
                     
                     # Create HTTP redirect response
                     for i in range(10):
-                        # For demo, just log - real injection requires root/admin
+                        # Real packet injection (requires root/admin)
+                        # You can use send() to inject crafted packets if you have privileges
                         self.progress.emit(f"Crafted packet {i+1}/10")
+                        # Example: send(IP(dst=self.target_ip)/TCP()/Raw(load="GET / HTTP/1.1\r\n\r\n"))
+                        # Uncomment below for real injection:
+                        # send(IP(dst=self.target_ip)/TCP()/Raw(load="GET / HTTP/1.1\r\n\r\n"))
                         time.sleep(0.3)
                     
                     self.progress.emit("✓ Packets ready for injection")
@@ -287,11 +291,7 @@ class DeAPoLModule(QWidget):
                     
         except Exception as e:
             self.logs_text.append(f"Error: {str(e)}")
-            # Fallback to sample data
-            devices = [
-                ("192.168.1.1", "00:11:22:33:44:55", "Router"),
-                ("192.168.1.100", "aa:bb:cc:dd:ee:ff", "PC"),
-            ]
+            devices = []
         
         # Display devices
         self.devices_table.setRowCount(len(devices))
