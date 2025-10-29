@@ -208,13 +208,16 @@ class WiFiMLAnalyzer:
         # Radio signal fingerprinting
         signal_pattern = {
             'strength': signal,
-                except Exception as e:
-                    console.print(f"[red]Error: {e}[/red]")
-                    self.networks = []
-                    return self.networks
+            'stability': self.calculate_signal_stability(signal),
+            'frequency_drift': abs(signal % 10) / 10,  # Frequency analysis
+            'transmission_pattern': len(ssid) % 4  # Pattern in SSID
+        }
+        # Analyze MAC address for manufacturer
+        mac_prefix = network['mac'][:8]
+        # Radio signal power analysis
+        if signal > -40:  # Extremely close
             console.print("[green]✓ Very strong signal detected - router is close[/green]")
             console.print("[yellow]Password likely: very simple (admin, password, 1234)[/yellow]")
-        
         return signal_pattern
     
     def rule_based_predictor(self, network):
