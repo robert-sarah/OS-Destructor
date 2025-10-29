@@ -22,6 +22,87 @@ console = Console()
 IS_LINUX = platform.system() == 'Linux'
 IS_WINDOWS = platform.system() == 'Windows'
 
+# Terms acceptance file
+TERMS_FILE = ".terms_accepted"
+
+def show_terms_and_conditions():
+    """Display terms and conditions"""
+    if os.path.exists(TERMS_FILE):
+        return True  # Already accepted
+    
+    console.clear()
+    console.print(Panel.fit(
+        "[bold red]⚠️  TERMS OF USE & DISCLAIMER ⚠️[/bold red]\n\n"
+        "[yellow]CRITICAL LEGAL NOTICE[/yellow]",
+        border_style="red",
+        box=box.DOUBLE
+    ))
+    
+    terms = """
+[bold cyan]LIST 1: ETHICAL USE ONLY[/bold cyan]
+
+This framework is developed STRICTLY for:
+✓ Authorized security testing
+✓ Educational purposes
+✓ Penetration testing with written permission
+✓ Security research in controlled environments
+
+[bold yellow]LIST 2: PROHIBITED USES[/bold yellow]
+
+You MUST NOT use this framework for:
+✗ Unauthorized access to systems
+✗ Illegal activities
+✗ Hacking without permission
+✗ Cybercrime
+✗ Data theft
+✗ Network disruption
+
+[bold red]LIST 3: LEGAL LIABILITY[/bold red]
+
+⚠️  YOU ARE SOLELY RESPONSIBLE FOR YOUR ACTIONS
+
+• Misuse is ILLEGAL and may result in criminal prosecution
+• Author assumes NO liability for misuse
+• Use only on systems you own or have written authorization
+• Violation of laws may result in severe penalties
+• This tool does NOT grant permission to attack systems
+
+[bold green]By accepting, you acknowledge:[/bold green]
+✓ You understand the legal implications
+✓ You will use this tool only ethically and legally
+✓ You accept full responsibility for your actions
+✓ You have authorization for any testing performed
+
+[yellow]Remember: With great power comes great responsibility![/yellow]
+"""
+    
+    console.print(terms)
+    
+    console.print("\n")
+    console.print(Panel.fit(
+        "[bold]You must read and accept to continue[/bold]",
+        border_style="yellow"
+    ))
+    
+    while True:
+        choice = Prompt.ask(
+            "\n[bold cyan]Accept Terms of Use?[/bold cyan]",
+            choices=["yes", "no", "y", "n"],
+            default="no"
+        )
+        
+        if choice.lower() in ['yes', 'y']:
+            # Save acceptance
+            with open(TERMS_FILE, 'w') as f:
+                f.write(f"Accepted: {platform.system()}\n")
+            console.print("\n[bold green]✓ Terms accepted. Welcome to the framework![/bold green]\n")
+            input("Press ENTER to continue...")
+            return True
+        elif choice.lower() in ['no', 'n']:
+            console.print("\n[bold red]❌ Terms not accepted. Exiting...[/bold red]")
+            console.print("[yellow]This framework requires acceptance of terms.[/yellow]\n")
+            sys.exit(0)
+
 class SecurityFramework:
     """Main framework menu"""
     
@@ -57,7 +138,17 @@ class SecurityFramework:
             '27': ('WiFi ML AI Chat', 'rich_wifi_ml_ai.py', lambda: self.run_file('rich_wifi_ml_ai.py')),
             '28': ('Super Malware Gen', 'rich_super_malware.py', lambda: self.run_file('rich_super_malware.py')),
             '29': ('WiFi Radio Signal AI', 'rich_wifi_ml.py', lambda: self.run_file('rich_wifi_ml.py')),
-            '30': ('ML Black Hat AI (GUI)', 'main.py', lambda: self.run_file('main.py'))
+            '30': ('Anti-Detection', 'rich_antidetection.py', lambda: self.run_file('rich_antidetection.py')),
+            '31': ('Advanced Persistence', 'rich_persistence_mbr.py', lambda: self.run_file('rich_persistence_mbr.py')),
+            '32': ('Data Exfiltration', 'rich_data_exfil.py', lambda: self.run_file('rich_data_exfil.py')),
+            '33': ('Advanced DDoS', 'rich_ddos_advanced.py', lambda: self.run_file('rich_ddos_advanced.py')),
+            '34': ('Malware Generator', 'rich_malware_gen.py', lambda: self.run_file('rich_malware_gen.py')),
+            '35': ('Advanced Social Eng', 'rich_social_advanced.py', lambda: self.run_file('rich_social_advanced.py')),
+            '36': ('Network Advanced', 'rich_network_advanced.py', lambda: self.run_file('rich_network_advanced.py')),
+            '37': ('Anti-Forensics', 'rich_antiforensics.py', lambda: self.run_file('rich_antiforensics.py')),
+            '38': ('Cloud Exploitation', 'rich_cloud_exploit.py', lambda: self.run_file('rich_cloud_exploit.py')),
+            '39': ('ML Adversarial', 'rich_ml_adversarial.py', lambda: self.run_file('rich_ml_adversarial.py')),
+            '40': ('ML Black Hat AI (GUI)', 'main.py', lambda: self.run_file('main.py'))
         }
         
     def show_menu(self):
@@ -112,7 +203,17 @@ class SecurityFramework:
             '27': 'WiFi ML AI - Chat interface with AI',
             '28': 'Super Malware - Multi-platform advanced',
             '29': 'WiFi Radio Signal Analysis - Predict passwords from signals',
-            '30': 'ML Black Hat AI (GUI interface)'
+            '30': 'Anti-Detection - Anti-VM, Anti-Sandbox, Polymorphism',
+            '31': 'Advanced Persistence - MBR, UEFI, Certificates',
+            '32': 'Data Exfiltration - Cloud, Tor, DNS',
+            '33': 'Advanced DDoS - Amplification, SlowHTTP, IoT Botnet',
+            '34': 'Malware Generator - Ransomware, Spyware, Bootkit',
+            '35': 'Advanced Social Engineering - USB, SMS, Multi-page',
+            '36': 'Network Advanced - Rogue WiFi, Pineapple, Honeypots',
+            '37': 'Anti-Forensics - Log clearing, Timestomping',
+            '38': 'Cloud Exploitation - AWS, Containers, Serverless',
+            '39': 'ML Adversarial - ML Evasion, Deepfakes, GAN',
+            '40': 'ML Black Hat AI (GUI interface)'
         }
         
         for num, (name, _, _) in self.modules.items():
@@ -159,7 +260,7 @@ class SecurityFramework:
             
             choice = Prompt.ask(
                 "\n[bold cyan]Select module[/bold cyan]",
-                choices=[str(i) for i in range(1, 31)] + ['13a'] + ['q', 'Q'],
+                choices=[str(i) for i in range(1, 41)] + ['13a'] + ['q', 'Q'],
                 default='q'
             )
             
@@ -172,6 +273,10 @@ class SecurityFramework:
             input("\nPress ENTER to return to menu...")
 
 def main():
+    # Show terms on first launch
+    if not show_terms_and_conditions():
+        return
+    
     framework = SecurityFramework()
     framework.main_loop()
 

@@ -23,7 +23,7 @@
 - Send phishing emails with HTML templates
 - Generate fake email addresses automatically
 - SMTP server configuration
-- Real email sending (no simulation)
+
 - Activity logging to files
 - Template customization
 
@@ -38,7 +38,7 @@
 
 ### Technical Improvements
 
-#### Removed Simulations
+
 - All modules now use real implementations
 - No more `time.sleep()` placeholders
 - Actual network scanning with Scapy

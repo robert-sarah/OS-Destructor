@@ -95,7 +95,7 @@ Cet outil est conçu **uniquement** pour :
 
 1. Clonez ce repository :
 ```bash
-git clone <url-du-repo>
+git clone https://github.com/robert-sarah/OS-Destructor.git
 cd AI
 ```
 
@@ -104,7 +104,7 @@ cd AI
 pip install -r requirements.txt
 ```
 
-**Note** : Assurez-vous que Python 3.7+ est installé sur votre système.
+
 
 ## 🎮 Utilisation
 

@@ -22,7 +22,7 @@ class ReconWorker(QThread):
     def run(self):
         """Exécute la reconnaissance"""
         import time
-        time.sleep(2)  # Simulation
+        time.sleep(2)
         
         results = {
             "IP": "192.168.1.1 (exemple)",

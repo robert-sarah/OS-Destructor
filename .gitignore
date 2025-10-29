@@ -46,3 +46,6 @@ payloads/
 results/
 logs/
 
+# Terms acceptance
+.terms_accepted
+

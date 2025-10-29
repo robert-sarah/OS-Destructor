@@ -26,12 +26,15 @@ class PayloadWorker(QThread):
         import time
         time.sleep(1)
         
-        # Simulation de génération
         payload = f"payload_{self.payload_type}_{self.host}_{self.port}"
         encoded = base64.b64encode(payload.encode()).decode()
         
         result = f"Payload {self.payload_type} généré:\n{encoded}"
         self.finished.emit(result)
+    payload = f"payload_{self.payload_type}_{self.host}_{self.port}"
+    encoded = base64.b64encode(payload.encode()).decode()
+    result = f"Payload {self.payload_type} généré:\n{encoded}"
+    self.finished.emit(result)
 
 class PayloadModule(QWidget):
     """Module de génération de payloads"""

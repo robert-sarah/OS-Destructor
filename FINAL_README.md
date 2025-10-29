@@ -138,7 +138,7 @@ Unauthorized use is illegal and may result in criminal prosecution.
 
 1. **AI Chat Interface** - Natural language interaction
 2. **Real Code Generation** - Files are actually created
-3. **No Simulations** - Everything is functional
+
 4. **Rich Interface** - Professional console output
 5. **Complete Toolkit** - 11 integrated modules
 6. **Production Ready** - No placeholders or fakes

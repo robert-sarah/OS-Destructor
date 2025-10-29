@@ -1,0 +1,14 @@
+
+Subject: Urgent: Company Security Update Required
+
+Dear Employee,
+
+Our IT department has detected suspicious activity on your account.
+Please verify your credentials immediately:
+
+[LINK TO FAKE LOGIN PAGE]
+
+This is mandatory to prevent account suspension.
+
+IT Security Team
+            
