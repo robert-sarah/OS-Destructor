@@ -163,7 +163,7 @@ class EmailModule(QWidget):
         from_layout = QHBoxLayout()
         from_layout.addWidget(QLabel("From Email:"))
         self.from_email_input = QLineEdit()
-    self.from_email_input.setPlaceholderText("Adresse email d'expéditeur")
+        self.from_email_input.setPlaceholderText("Adresse email d'expéditeur")
         from_layout.addWidget(self.from_email_input)
         layout.addLayout(from_layout)
         
@@ -171,7 +171,7 @@ class EmailModule(QWidget):
         to_layout = QHBoxLayout()
         to_layout.addWidget(QLabel("To Email:"))
         self.to_email_input = QLineEdit()
-    self.to_email_input.setPlaceholderText("Adresse email du destinataire")
+        self.to_email_input.setPlaceholderText("Adresse email du destinataire")
         to_layout.addWidget(self.to_email_input)
         layout.addLayout(to_layout)
         

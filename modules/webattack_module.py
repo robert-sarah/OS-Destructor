@@ -181,17 +181,10 @@ class WebAttackModule(QWidget):
         """Callback d'attaque terminée"""
         self.logs_text.append(f"\n{result}")
         
-        # Ajout de résultats factices
-        self.results_table.setRowCount(3)
-        
-        test_cases = [
-            ("param1", "test", "Non"),
-            ("param2", "value", "Oui"),
-            ("param3", "data", "Non")
-        ]
-        
-        for i, (param, value, vuln) in enumerate(test_cases):
-            self.results_table.setItem(i, 0, QTableWidgetItem(param))
-            self.results_table.setItem(i, 1, QTableWidgetItem(value))
-            self.results_table.setItem(i, 2, QTableWidgetItem(vuln))
+    # Afficher ici les résultats réels de l'attaque
+    # Exemple : self.results_table.setRowCount(len(real_results))
+    # for i, (param, value, vuln) in enumerate(real_results):
+    #     self.results_table.setItem(i, 0, QTableWidgetItem(param))
+    #     self.results_table.setItem(i, 1, QTableWidgetItem(value))
+    #     self.results_table.setItem(i, 2, QTableWidgetItem(vuln))
 

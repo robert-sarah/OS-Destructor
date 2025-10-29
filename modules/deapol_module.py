@@ -162,7 +162,7 @@ class DeAPoLModule(QWidget):
         target_layout = QHBoxLayout()
         target_layout.addWidget(QLabel("Target IP:"))
         self.target_ip_input = QLineEdit()
-    self.target_ip_input.setPlaceholderText("Entrez l'adresse IP cible (ex: 192.168.1.100)")
+        self.target_ip_input.setPlaceholderText("Entrez l'adresse IP cible (ex: 192.168.1.100)")
         target_layout.addWidget(self.target_ip_input)
         layout.addLayout(target_layout)
         
