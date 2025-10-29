@@ -88,7 +88,7 @@ class ReconModule(QWidget):
         target_layout = QHBoxLayout()
         target_layout.addWidget(QLabel("Cible:"))
         self.target_input = QLineEdit()
-    self.target_input.setPlaceholderText("Entrez le domaine ou l'adresse IP cible")
+        self.target_input.setPlaceholderText("Entrez le domaine ou l'adresse IP cible")
         target_layout.addWidget(self.target_input)
         layout.addLayout(target_layout)
         
