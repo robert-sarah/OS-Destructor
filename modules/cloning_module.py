@@ -87,7 +87,7 @@ class CloningModule(QWidget):
         # URL source
         url_layout = QHBoxLayout()
         url_layout.addWidget(QLabel("URL à cloner:"))
-        self.url_input = QLineEdit()
+    self.url_input = QLineEdit()
     self.url_input.setPlaceholderText("Entrez l'URL à cloner (ex: https://site.com)")
         url_layout.addWidget(self.url_input)
         layout.addLayout(url_layout)
