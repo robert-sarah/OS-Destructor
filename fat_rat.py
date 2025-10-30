@@ -1,3 +1,5 @@
+# from modules.ai_conscience import AIConscience
+# ai_conscience = AIConscience()
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 

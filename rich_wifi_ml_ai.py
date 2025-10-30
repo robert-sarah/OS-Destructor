@@ -1,3 +1,5 @@
+from modules.ai_conscience import AIConscience
+ai_conscience = AIConscience()
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 """
@@ -141,12 +143,7 @@ class WiFiMLAI:
     def generate_ai_response(self, message):
         """Génère une réponse IA locale avec DialoGPT"""
         try:
-            from transformers import pipeline, Conversation
-            if not hasattr(self, 'chatbot'):
-                self.chatbot = pipeline("conversational", model="microsoft/DialoGPT-medium")
-            conv = Conversation(message)
-            result = self.chatbot(conv)
-            return result.generated_responses[-1]
+            return ai_conscience.ask(message)
         except Exception as e:
             return f"[IA locale] Erreur ou modèle non installé : {e}\nRéponse par défaut : Je peux t'aider sur le WiFi, pose ta question !"
 

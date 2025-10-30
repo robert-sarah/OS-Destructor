@@ -14,6 +14,8 @@ import re
 import numpy as np
 import pandas as pd
 import os
+from modules.ai_conscience import AIConscience
+ai_conscience = AIConscience()
 
 console = Console()
 
@@ -158,6 +160,8 @@ class WiFiMLAnalyzer:
             f"[bold cyan]ML Password Prediction: {network['ssid']}[/bold cyan]",
             border_style="cyan"
         ))
+    # Ajout d'une conscience IA pour analyse avancée
+    console.print(f"[magenta]AI Conscience:[/magenta] {ai_conscience.ask('Analyse ce réseau WiFi : ' + str(network))}")
         
         if not ML_AVAILABLE:
             console.print("[red]ML libraries not available[/red]")
@@ -327,6 +331,8 @@ class WiFiMLAnalyzer:
         for network in networks[:5]:  # Analyze first 5 networks
             predictions = self.predict_password(network)
             self.display_results(network, predictions)
+            # Conseils IA pour chaque analyse
+            console.print(f"[magenta]AI Conscience:[/magenta] {ai_conscience.ask('Comment améliorer l’attaque sur ce réseau ? ' + str(network))}")
             console.print()
 
 if __name__ == "__main__":

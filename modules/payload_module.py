@@ -31,10 +31,7 @@ class PayloadWorker(QThread):
         
         result = f"Payload {self.payload_type} généré:\n{encoded}"
         self.finished.emit(result)
-    payload = f"payload_{self.payload_type}_{self.host}_{self.port}"
-    encoded = base64.b64encode(payload.encode()).decode()
-    result = f"Payload {self.payload_type} généré:\n{encoded}"
-    self.finished.emit(result)
+    # (Supprimé : code hors méthode, tout est dans run())
 
 class PayloadModule(QWidget):
     """Module de génération de payloads"""

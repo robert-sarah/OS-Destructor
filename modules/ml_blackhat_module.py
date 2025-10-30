@@ -1,3 +1,5 @@
+from modules.ai_conscience import AIConscience
+ai_conscience = AIConscience()
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 """
@@ -42,6 +44,7 @@ class MLWorker(QThread):
                 return
                 
             self.progress.emit("Generating adversarial dataset...")
+            self.progress.emit('[AI Conscience] : ' + ai_conscience.ask('Comment générer un dataset vraiment indétectable ?'))
             
             # Generate data
             X, y = make_classification(n_samples=5000, n_features=20, n_informative=10,
@@ -49,6 +52,7 @@ class MLWorker(QThread):
             X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2)
             
             self.progress.emit("Building neural network...")
+            self.progress.emit('[AI Conscience] : ' + ai_conscience.ask('Comment rendre le réseau plus furtif ?'))
             
             # Create model
             model = tf.keras.Sequential([
@@ -60,6 +64,7 @@ class MLWorker(QThread):
             model.compile(optimizer='adam', loss='binary_crossentropy', metrics=['accuracy'])
             
             self.progress.emit(f"Training for {self.epochs} epochs...")
+            self.progress.emit('[AI Conscience] : ' + ai_conscience.ask('Comment optimiser l’attaque ML ?'))
             
             # Train
             history = model.fit(X_train, y_train, epochs=self.epochs, batch_size=32, verbose=0)

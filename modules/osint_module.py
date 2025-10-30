@@ -18,6 +18,8 @@ from datetime import datetime
 import whois
 import socket
 import dns.resolver
+from modules.ai_conscience import AIConscience
+ai_conscience = AIConscience()
 
 class OSINTWorker(QThread):
     """Thread for OSINT gathering"""
@@ -33,40 +35,40 @@ class OSINTWorker(QThread):
         results = {}
         
         try:
+            # Ajout de la conscience IA pour chaque étape
+            self.progress.emit('[AI Conscience] : ' + ai_conscience.ask(f'Comment OSINT peut être plus furtif et black hat sur {self.target}?'))
             # Check if it's an email or domain
             if '@' in self.target:
                 results['type'] = 'email'
                 email_parts = self.target.split('@')
                 domain = email_parts[1]
-                
                 self.progress.emit("Gathering email information...")
+                self.progress.emit('[AI Conscience] : ' + ai_conscience.ask(f'Comment exploiter l’email {self.target} au maximum?'))
                 results['email'] = self.target
                 results['username'] = email_parts[0]
                 results['domain'] = domain
-                
                 # Check if email exists (using Have I Been Pwned API)
                 self.progress.emit("Checking if email is compromised...")
+                self.progress.emit('[AI Conscience] : ' + ai_conscience.ask(f'Comment utiliser les failles de {self.target}?'))
                 results['compromised'] = self.check_email_breach(self.target)
-                
                 # Domain information
                 self.progress.emit("Gathering domain information...")
+                self.progress.emit('[AI Conscience] : ' + ai_conscience.ask(f'Comment attaquer le domaine {domain}?'))
                 domain_info = self.get_domain_info(domain)
                 results.update(domain_info)
-                
             else:
                 results['type'] = 'domain'
                 results['domain'] = self.target
-                
                 self.progress.emit("Gathering domain information...")
+                self.progress.emit('[AI Conscience] : ' + ai_conscience.ask(f'Comment exploiter le domaine {self.target} au maximum?'))
                 domain_info = self.get_domain_info(self.target)
                 results.update(domain_info)
-                
                 self.progress.emit("Scanning for associated emails...")
+                self.progress.emit('[AI Conscience] : ' + ai_conscience.ask(f'Comment utiliser les emails associés à {self.target}?'))
                 results['emails'] = self.find_associated_emails(self.target)
-            
             self.progress.emit("Analysis complete!")
+            self.progress.emit('[AI Conscience] : ' + ai_conscience.ask(f'Quels sont les prochains steps black hat sur {self.target}?'))
             self.finished.emit(results)
-            
         except Exception as e:
             self.finished.emit({'error': str(e)})
     
