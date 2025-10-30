@@ -139,15 +139,16 @@ class WiFiMLAI:
 • help - Show this message"""
     
     def generate_ai_response(self, message):
-        """Generate AI response"""
-        responses = [
-            "I can help you with WiFi attacks and password prediction.",
-            "Try asking me to scan networks or predict passwords.",
-            f"I understand: {message[:50]}... What would you like me to do?",
-            "I'm your WiFi ML AI assistant. Tell me what to do."
-        ]
-        import random
-        return random.choice(responses)
+        """Génère une réponse IA locale avec DialoGPT"""
+        try:
+            from transformers import pipeline, Conversation
+            if not hasattr(self, 'chatbot'):
+                self.chatbot = pipeline("conversational", model="microsoft/DialoGPT-medium")
+            conv = Conversation(message)
+            result = self.chatbot(conv)
+            return result.generated_responses[-1]
+        except Exception as e:
+            return f"[IA locale] Erreur ou modèle non installé : {e}\nRéponse par défaut : Je peux t'aider sur le WiFi, pose ta question !"
 
 if __name__ == "__main__":
     ai = WiFiMLAI()
